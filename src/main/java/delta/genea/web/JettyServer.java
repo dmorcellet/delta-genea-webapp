@@ -10,6 +10,8 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Jetty server for the genea application.
@@ -17,6 +19,8 @@ import org.eclipse.jetty.util.resource.Resource;
  */
 public class JettyServer
 {
+  private static final Logger LOGGER=LoggerFactory.getLogger(JettyServer.class);
+
   private Server server;
 
   /**
@@ -39,10 +43,10 @@ public class JettyServer
 
     ClassLoader cl=this.getClass().getClassLoader();
     URL url = cl.getResource("index.html");
-    System.out.println("URL: "+url);
+    LOGGER.debug("URL of index.html: {}",url);
     String dirUrlStr = url.toString().replace("index.html","");
     URL dir = new URL(dirUrlStr);
-    System.out.println("URL: "+dir);
+    LOGGER.debug("URL of ressources: {}",dir);
     Resource ressource = Resource.newResource(dir);
     resHandler.setBaseResource(ressource);
 

@@ -13,6 +13,8 @@ import org.eclipse.jetty.util.resource.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import delta.genea.misc.GeneaCfg;
+
 /**
  * Jetty server for the genea application.
  * @author DAM
@@ -31,7 +33,8 @@ public class JettyServer
   {
     server=new Server();
     ServerConnector connector=new ServerConnector(server);
-    connector.setPort(8080);
+    int port=GeneaCfg.getInstance().getServerPort();
+    connector.setPort(port);
     server.setConnectors(new Connector[] {connector});
     ServletContextHandler context=new ServletContextHandler(ServletContextHandler.SESSIONS);
     context.setContextPath("/");
